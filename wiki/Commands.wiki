@@ -1,0 +1,30 @@
+= Introducción =
+Como agregar un comando al plugin
+
+
+= Detalles =
+
+== Primer paso ==
+Agregar el comando con su descripción al archivo *plugin.yml*
+_Los archivos *.yml usan espacios para el identado, si usas tab, se va todo al carajo_
+
+Ejemplo:
+{{{
+    myebuild:
+        description: Tells you how to use rapid build commands
+        usage: /myebuild <command> [command2]
+        permission: myessentials.build.help
+}}}
+En usage especificar si el comando admite argumentos y si estos son un requisito (< >) u son opcionales ([ ]).
+
+Como el plugin usa la API de Permissions de <nombre del creador que no recuerdo>, en permission iria el _nodo_ necesario para poder usar ese comando. En este caso, si el jugador que invoca el comando no tiene el permiso myessentials.build.help, le saltara un error.
+
+_En caso de que el plugin Permissions no este presente en el servidor, el comando solo puede ser ejecutado si el usuario es Op._
+
+
+== Segundo paso ==
+Con el fin de mantener limpio el codigo, para cada comando se crea una clase que luego es cargado _on the fly_.
+Para hacer esto, hay que crear dentro del paquete commands, una clase Cmd<nombre lower case> que herede de la superclase MyECommand.
+
+Cuando el jugador use el comando, se llamara al metodo execute (que el comando debe implementar!) con los argumentos con los que fue llamado.
+El comando debera devolver true una vez que ha finalizado su ejecucion.
