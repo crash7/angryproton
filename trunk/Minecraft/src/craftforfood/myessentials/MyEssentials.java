@@ -2,6 +2,7 @@ package craftforfood.myessentials;
 
 import java.util.logging.Logger;
 
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -26,6 +27,10 @@ public class MyEssentials extends JavaPlugin {
 	
 	// Config!
 	private int buildTool; 
+	
+	// Useful
+	private Block pointA;
+	private Block pointB;
 	
 	public void onDisable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
@@ -107,6 +112,37 @@ public class MyEssentials extends JavaPlugin {
 	 */
 	public int getBuildTool() {
 		return buildTool;
+		
 	}
 	
+	/**
+	 * @param pointA the pointA to set
+	 */
+	public void setPointA(Block pointA) {
+		this.pointA = pointA;
+	}
+
+	/**
+	 * @return the pointA
+	 */
+	public Block getPointA() {
+		return pointA;
+		
+	}
+	
+	/**
+	 * @param pointB the pointB to set
+	 */
+	public void setPointB(Block pointB) {
+		this.pointB = pointB;
+	}
+
+	/**
+	 * @return the pointB
+	 */
+	public Block getPointB() {
+		return pointB;
+		
+	}
+
 }
