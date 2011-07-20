@@ -1,7 +1,8 @@
-package crash.myessentials.commands;
+package craftforfood.myessentials.commands;
 
 import org.bukkit.entity.Player;
-import crash.myessentials.MyEssentials;
+
+import craftforfood.myessentials.MyEssentials;
 
 public abstract class MyECommand {
 	private String node;

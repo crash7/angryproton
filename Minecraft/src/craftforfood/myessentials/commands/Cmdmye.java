@@ -1,4 +1,4 @@
-package crash.myessentials.commands;
+package craftforfood.myessentials.commands;
 
 public class Cmdmye extends MyECommand {
 	
