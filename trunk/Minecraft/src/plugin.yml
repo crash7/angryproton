@@ -1,0 +1,31 @@
+name: MyEssentials
+main: crash.myessentials.MyEssentials
+version: 0.1
+
+commands:
+    mye:
+        description: blah
+        usage: /mye
+        permission: myessentials.mye
+    myebuild:
+        description: Tells you how to use rapid build commands
+        usage: /myebuild [command]
+        permission: myessentials.build.help
+    zonecopy:
+        description: Tells you how to use rapid build commands
+    zonecut:
+        description: Tells you how to use rapid build commands
+    zonepaste:
+        description: Tells you how to use rapid build commands
+    zonetop:
+        description: Tells you how to use rapid build commands
+    zonefloor:
+        description: Tells you how to use rapid build commands
+    zoneexp:
+        description: Tells you how to use rapid build commands
+    zonexvar:
+        description: Tells you how to use rapid build commands
+    zoneyvar:
+        description: Tells you how to use rapid build commands
+    zonezvar:
+        description: Tells you how to use rapid build commands
