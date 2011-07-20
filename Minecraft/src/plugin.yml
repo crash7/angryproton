@@ -7,10 +7,10 @@ commands:
         description: blah
         usage: /mye
         permission: myessentials.mye
-    myebuild:
+    sphere:
         description: Tells you how to use rapid build commands
-        usage: /myebuild [command]
-        permission: myessentials.build.help
+        usage: /sphere [command]
+        permission: myessentials.build.sphere
     zonecopy:
         description: Tells you how to use rapid build commands
     zonecut:
