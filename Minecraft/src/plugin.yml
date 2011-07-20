@@ -1,5 +1,5 @@
 name: MyEssentials
-main: crash.myessentials.MyEssentials
+main: craftforfood.myessentials.MyEssentials
 version: 0.1
 
 commands:
