@@ -1,19 +1,23 @@
 package craftforfood.myessentials;
 
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
 
 import craftforfood.myessentials.commands.MyECommand;
+import craftforfood.myessentials.listeners.BuilderPlayerListener;
 
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.util.config.Configuration;
 
 /**
@@ -29,9 +33,9 @@ public class MyEssentials extends JavaPlugin {
 	private int buildTool; 
 	
 	// Useful
-	private Block pointA;
-	private Block pointB;
-	
+	private HashMap<String, Block[]> points = new HashMap<String, Block[]>();
+	public static final int MAXPOINTS = 2;
+		
 	public void onDisable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
 		MyEssentials.cLog.info("MyEssentials (version: " + pdfFile.getVersion() + ") by CraftForFood team desactivated!");
@@ -42,7 +46,8 @@ public class MyEssentials extends JavaPlugin {
 		MyEssentials.cLog.info("MyEssentials (version: " + pdfFile.getVersion() + ") by CraftForFood team activated!");
 		
 		// Events registration
-		
+		PluginManager pm = getServer().getPluginManager();
+	    pm.registerEvent(Event.Type.PLAYER_INTERACT, new BuilderPlayerListener(this), Event.Priority.Normal, this);
 		
 		// Permissions
 		Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
@@ -60,8 +65,8 @@ public class MyEssentials extends JavaPlugin {
 		buildTool = pCfg.getInt("build-tool", 280);
 		
 		pCfg.save();
-		// END Config		
-		
+		// END Config
+				
 	}
 	
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
@@ -116,33 +121,45 @@ public class MyEssentials extends JavaPlugin {
 	}
 	
 	/**
-	 * @param pointA the pointA to set
+	 * 
+	 * @param p Player
+	 * @param point Block
 	 */
-	public void setPointA(Block pointA) {
-		this.pointA = pointA;
+	public void setPointX(Player p, int xpoint, Block point) {
+		Block[] blocks = points.get(p.getName());
+
+		if(blocks == null) {
+			blocks = new Block[MyEssentials.MAXPOINTS];
+			
+		}
+			
+		if(xpoint >= 0 && xpoint < blocks.length) {
+			blocks[xpoint] = point;
+			
+		}
+		
+		points.put(p.getName(), blocks);
+		
 	}
 
 	/**
-	 * @return the pointA
+	 * 
+	 * @param pointindex
+	 * @param player
+	 * @return Block
 	 */
-	public Block getPointA() {
-		return pointA;
+	public Block getPoint(int pointindex, Player player) {
+		Block[] blocks = points.get(player.getName());
+		if(blocks != null) {
+			if(pointindex >= 0 && pointindex < blocks.length) {
+				return blocks[pointindex];
+				
+			}
+			
+		}
+				
+		return null;
 		
 	}
 	
-	/**
-	 * @param pointB the pointB to set
-	 */
-	public void setPointB(Block pointB) {
-		this.pointB = pointB;
-	}
-
-	/**
-	 * @return the pointB
-	 */
-	public Block getPointB() {
-		return pointB;
-		
-	}
-
 }
