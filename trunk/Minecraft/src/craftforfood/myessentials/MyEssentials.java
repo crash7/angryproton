@@ -1,4 +1,4 @@
-package crash.myessentials;
+package craftforfood.myessentials;
 
 import java.util.logging.Logger;
 
@@ -9,7 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
 
-import crash.myessentials.commands.MyECommand;
+import craftforfood.myessentials.commands.MyECommand;
 
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -18,8 +18,8 @@ import org.bukkit.util.config.Configuration;
 /**
  * MyEssentials for Bukkit (Minecraft)
  * @author Crash
- * 
- */
+ * @author Juan
+ */ 
 public class MyEssentials extends JavaPlugin {
 	private static PermissionHandler pHandler;
 	private static final Logger cLog = Logger.getLogger("Minecraft");
@@ -29,12 +29,12 @@ public class MyEssentials extends JavaPlugin {
 	
 	public void onDisable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
-		MyEssentials.cLog.info("MyEssentials (version: " + pdfFile.getVersion() + ") by Crash desactivated!");
+		MyEssentials.cLog.info("MyEssentials (version: " + pdfFile.getVersion() + ") by CraftForFood team desactivated!");
 	}
 
 	public void onEnable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
-		MyEssentials.cLog.info("MyEssentials (version: " + pdfFile.getVersion() + ") by Crash activated!");
+		MyEssentials.cLog.info("MyEssentials (version: " + pdfFile.getVersion() + ") by CraftForFood team activated!");
 		
 		// Events registration
 		
@@ -49,7 +49,7 @@ public class MyEssentials extends JavaPlugin {
 	    MyEssentials.cLog.info("Using Permissions plugin");
 		
 		// Config
-		MyEssentials.cLog.info("MyEssentials by Crash config stuff");
+		MyEssentials.cLog.info("MyEssentials by CraftForFood team config stuff");
 		Configuration pCfg = getConfiguration();
 		// Builder		
 		buildTool = pCfg.getInt("build-tool", 280);
@@ -67,7 +67,7 @@ public class MyEssentials extends JavaPlugin {
 				MyECommand cmd;
 				try {
 					cmd = (MyECommand) getClassLoader()
-							.loadClass("crash.myessentials.commands.Cmd" + command.getName().toLowerCase()).newInstance(); 
+							.loadClass("craftforfood.myessentials.commands.Cmd" + command.getName().toLowerCase()).newInstance(); 
 					
 					if(hasPermission(player, "myessentials." + cmd.getNode())) {
 						cmd.setMyEssentials(this);
