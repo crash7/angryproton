@@ -1,6 +1,6 @@
-package crash.myessentials.commands;
+package craftforfood.myessentials.commands;
 
-import org.bukkit.block; 
+import org.bukkit.block.Block; 
 import java.lang.Math;
 import java.util.Stack;
 
@@ -18,6 +18,7 @@ public class Cmdsphere extends MyECommand {
 		
 		public Cmdsphere() {
 			super("build.sphere");
+			
         }
         
         public boolean execute(String[] args) {
@@ -38,7 +39,7 @@ public class Cmdsphere extends MyECommand {
 				idI = Integer.parseInt(args[2]);
 				
 				if (args[3] == null)
-					c = 1
+					c = 1;
 				else
 					c = Integer.parseInt(args[3]);
 					

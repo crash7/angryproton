@@ -4,9 +4,13 @@ version: 0.1
 
 commands:
     mye:
-        description: blah
+        description: Information about MyEssentials
         usage: /mye
         permission: myessentials.mye
+    myegod:
+        description: Mess with us
+        usage: /myegod [args, ..]
+        permission: myessentials.myegod
     sphere:
         description: Tells you how to use rapid build commands
         usage: /sphere [command]
