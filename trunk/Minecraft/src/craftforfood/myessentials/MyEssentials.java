@@ -91,6 +91,8 @@ public class MyEssentials extends JavaPlugin {
 					}
 									
 				} catch(Exception e) {
+					player.sendMessage("We got and exception!");
+					player.sendMessage(e.getMessage());
 					return true;
 					
 				}
