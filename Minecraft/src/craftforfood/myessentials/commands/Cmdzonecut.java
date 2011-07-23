@@ -1,12 +1,15 @@
 package craftforfood.myessentials.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 
-public class Cmdzoneid extends MyECommand {
+public class Cmdzonecut extends MyECommand {
 
-	public Cmdzoneid() {
-		super("build.zoneid");
+	public Cmdzonecut() {
+		super("build.zonecut");
 
 	}
 
@@ -22,7 +25,7 @@ public class Cmdzoneid extends MyECommand {
 				}
 				id = Integer.parseInt(args[0]);
 				
-				if(mye.isAvailable(id, player)) {
+				if(mye.isAvailable(id)) {
 					Block a = mye.getPoint(0, player);
 					Block b = mye.getPoint(1, player);
 					
@@ -39,11 +42,11 @@ public class Cmdzoneid extends MyECommand {
 						}
 						
 						if(mye.getMaxBlocks() == 0 || blocks <= mye.getMaxBlocks()) {
+							List<Block> selectedblocks = new ArrayList<Block>();
 							for(int xdim = Math.min(a.getX(), b.getX()); xdim <= Math.max(a.getX(), b.getX()); xdim++) {
 								for(int ydim = Math.min(a.getY(), b.getY()); ydim <= Math.max(a.getY(), b.getY()); ydim++) {
 									for(int zdim = Math.min(a.getZ(), b.getZ()); zdim <= Math.max(a.getZ(), b.getZ()); zdim++) {
-										player.getWorld().getBlockAt(xdim,ydim,zdim).setTypeId(id);
-										player.getWorld().getBlockAt(xdim,ydim,zdim).setData((byte) data);
+										selectedblocks.add(player.getWorld().getBlockAt(xdim,ydim,zdim));
 										
 									}
 									
@@ -51,8 +54,9 @@ public class Cmdzoneid extends MyECommand {
 								
 							}
 							
-							player.sendMessage("§7You have changed " + blocks + 
-									" blocks to " + Material.getMaterial(id).name().toLowerCase().replace("_", " "));
+							mye.setClipboard(selectedblocks, player);
+							
+							player.sendMessage("§7You have cut a selection of " + blocks + " blocks");
 							
 						} else {
 							player.sendMessage("§cOver blocks limit (" + mye.getMaxBlocks() + ")");

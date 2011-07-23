@@ -1,9 +1,9 @@
 package craftforfood.myessentials.commands;
 
-public class Cmdreload extends MyECommand {
+public class Cmdpreload extends MyECommand {
 	
-	public Cmdreload() {
-		super("reload");
+	public Cmdpreload() {
+		super("preload");
 		
 	}
 	

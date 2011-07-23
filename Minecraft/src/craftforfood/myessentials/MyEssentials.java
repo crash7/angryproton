@@ -39,6 +39,7 @@ public class MyEssentials extends JavaPlugin {
 	
 	// Useful
 	private HashMap<String, Block[]> points = new HashMap<String, Block[]>();
+	private HashMap<String, Block[][][]> clipboard = new HashMap<String, Block[][][]>();
 	public static final int MAXPOINTS = 2;
 	public static final int MINY = 3;
 	public static final int MAXY = 128;
@@ -60,10 +61,13 @@ public class MyEssentials extends JavaPlugin {
 		Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
 	    if (permissionsPlugin == null) {
 	    	MyEssentials.cLog.info("[MyEssentials] Permissions plugin not detected, defaulting to OP!");
+	    	
+	    } else {
+	    	pHandler = ((Permissions) permissionsPlugin).getHandler();
+	    	MyEssentials.cLog.info("[MyEssentials] Using Permissions plugin");
+	    	
 	    }
 	    
-	    pHandler = ((Permissions) permissionsPlugin).getHandler();
-	    MyEssentials.cLog.info("[MyEssentials] Using Permissions plugin");
 		
 		// Config
 		MyEssentials.cLog.info("MyEssentials by CraftForFood team config stuff");
@@ -87,7 +91,7 @@ public class MyEssentials extends JavaPlugin {
 				try {
 					cmd = (MyECommand) getClassLoader()
 							.loadClass("craftforfood.myessentials.commands.Cmd" + command.getName().toLowerCase()).newInstance(); 
-					player.sendMessage("command loaded");
+
 					if(hasPermission(player, "myessentials." + cmd.getNode())) {
 						cmd.setMyEssentials(this);
 						cmd.setPlayer(player);
@@ -146,9 +150,9 @@ public class MyEssentials extends JavaPlugin {
 	 * @param materialid
 	 * @return
 	 */
-	public boolean isAvailable(int materialid) {
+	public boolean isAvailable(int materialid, Player player) {
 		return (materialid >= 0 && materialid <= 255 && Arrays.asList(Material.values()).contains(Material.getMaterial(materialid))
-				&& !bannedMaterials.contains(new Integer(materialid)));
+				&& (!bannedMaterials.contains(new Integer(materialid)) || hasPermission(player, "myessentials.build.banned")));
 
 	}
 	
@@ -194,4 +198,13 @@ public class MyEssentials extends JavaPlugin {
 		
 	}
 	
+	public void setClipboard(Block[][][] clip, Player player) {
+		clipboard.put(player.getName(), clip);
+		
+	}
+	
+	public Block[][][] getClipboard(Player player) {
+		return clipboard.get(player.getName());
+		
+	}
 }
