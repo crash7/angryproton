@@ -46,10 +46,10 @@ public class Cmdsphere extends MyECommand {
 			if (!(mye.isAvailable(idI)))
 				return;
 			
-			if (args[3] == null)
-				c = 1;
-			else
+			if (args.length == 4)
 				c = Integer.parseInt(args[3]);
+			else
+				c = 1
 				
 			if (c == 0)
 				mCubes = Math.ceil(r - 1 / 2) * 2 - 1;
@@ -70,23 +70,23 @@ public class Cmdsphere extends MyECommand {
 							}else{
 								if (c==1){
 									if (((slices.size() == 1)||(slices.size() == (cSlices - 2)))){
-										player.getWorld().getBlockAt((int)(b.getX()+cX-r),(int)(b.getY()+slices.size()-r),(int)(b.getZ()+cY)).setTypeId(idS); //shell
+										player.getWorld().getBlockAt((int)(b.getX()+cX-r),(int)(b.getY()+slices.size()-r),(int)(b.getZ()+cY-r)).setTypeId(idS); //shell
 									}else{
 										if ((Math.sqrt(Math.pow(y,2) + Math.pow(x,2))) > (radius - 2.1)){
-											player.getWorld().getBlockAt((int)(b.getX()+cX-r),(int)(b.getY()+slices.size()-r),(int)(b.getZ()+cY)).setTypeId(idS); //shell
+											player.getWorld().getBlockAt((int)(b.getX()+cX-r),(int)(b.getY()+slices.size()-r),(int)(b.getZ()+cY-r)).setTypeId(idS); //shell
 										}else{
 											//player.getWorld().getBlockAt((int)(b.getX()+cX),(int)(b.getY()+slices.size()),(int)(b.getZ()+cY)).setTypeId(idO); //out
-											player.getWorld().getBlockAt((int)(b.getX()+cX-r),(int)(b.getY()+slices.size()-r),(int)(b.getZ()+cY)).setTypeId(idI); //in
+											player.getWorld().getBlockAt((int)(b.getX()+cX-r),(int)(b.getY()+slices.size()-r),(int)(b.getZ()+cY-r)).setTypeId(idI); //in
 										}
 									}
 								}else{
 									if ((slices.size() == 1)||(slices.size() == (cSlices - 2))||(slices.size() == 0)||(slices.size() == (cSlices - 1))){
-										player.getWorld().getBlockAt((int)(b.getX()+cX-r),(int)(b.getY()+slices.size()-r),(int)(b.getZ()+cY)).setTypeId(idS); //shell
+										player.getWorld().getBlockAt((int)(b.getX()+cX-r),(int)(b.getY()+slices.size()-r),(int)(b.getZ()+cY-r)).setTypeId(idS); //shell
 									}else{
 										if ((Math.sqrt(Math.pow(y,2) + Math.pow(x,2))) > (radius - 2.1)){
-											player.getWorld().getBlockAt((int)(b.getX()+cX-r),(int)(b.getY()+slices.size()-r),(int)(b.getZ()+cY)).setTypeId(idS); //shell
+											player.getWorld().getBlockAt((int)(b.getX()+cX-r),(int)(b.getY()+slices.size()-r),(int)(b.getZ()+cY-r)).setTypeId(idS); //shell
 										}else{
-											player.getWorld().getBlockAt((int)(b.getX()+cX-r),(int)(b.getY()+slices.size()-r),(int)(b.getZ()+cY)).setTypeId(idI); //in
+											player.getWorld().getBlockAt((int)(b.getX()+cX-r),(int)(b.getY()+slices.size()-r),(int)(b.getZ()+cY-r)).setTypeId(idI); //in
 										}
 									}
 								}
