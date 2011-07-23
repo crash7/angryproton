@@ -32,11 +32,19 @@ public class Cmdsphere extends MyECommand {
 		else{
 			player.sendMessage("esfera");
 			if ((args.length != 3 ) && (args.length != 4 ))
-				player.sendMessage("El comando para crear esferas tiene más parámetros!!!");
+				player.sendMessage("§c" + mye.getCommand("sphere").getUsage());
+			
 			
 			r = Integer.parseInt(args[0]);
+			
 			idS = Integer.parseInt(args[1]);
+			if (!(mye.isAvailable(idS)))
+				return;
+			
 			idI = Integer.parseInt(args[2]);
+			
+			if (!(mye.isAvailable(idI)))
+				return;
 			
 			if (args[3] == null)
 				c = 1;
@@ -62,22 +70,23 @@ public class Cmdsphere extends MyECommand {
 							}else{
 								if (c==1){
 									if (((slices.size() == 1)||(slices.size() == (cSlices - 2)))){
-										player.getWorld().getBlockAt((int)(b.getX()+cX),(int)(b.getY()+slices.size()),(int)(b.getZ()+cY)).setTypeId(idS); //shell
+										player.getWorld().getBlockAt((int)(b.getX()+cX-(Math.sqrt(r))),(int)(b.getY()+slices.size()-(Math.sqrt(r))),(int)(b.getZ()+cY)).setTypeId(idS); //shell
 									}else{
 										if ((Math.sqrt(Math.pow(y,2) + Math.pow(x,2))) > (radius - 2.1)){
-											player.getWorld().getBlockAt((int)(b.getX()+cX),(int)(b.getY()+slices.size()),(int)(b.getZ()+cY)).setTypeId(idS); //shell
+											player.getWorld().getBlockAt((int)(b.getX()+cX-(Math.sqrt(r))),(int)(b.getY()+slices.size()-(Math.sqrt(r))),(int)(b.getZ()+cY)).setTypeId(idS); //shell
 										}else{
-											player.getWorld().getBlockAt((int)(b.getX()+cX),(int)(b.getY()+slices.size()),(int)(b.getZ()+cY)).setTypeId(idI); //in
+											//player.getWorld().getBlockAt((int)(b.getX()+cX),(int)(b.getY()+slices.size()),(int)(b.getZ()+cY)).setTypeId(idO); //out
+											player.getWorld().getBlockAt((int)(b.getX()+cX-(Math.sqrt(r))),(int)(b.getY()+slices.size()-(Math.sqrt(r))),(int)(b.getZ()+cY)).setTypeId(idI); //in
 										}
 									}
 								}else{
 									if ((slices.size() == 1)||(slices.size() == (cSlices - 2))||(slices.size() == 0)||(slices.size() == (cSlices - 1))){
-										player.getWorld().getBlockAt((int)(b.getX()+cX),(int)(b.getY()+slices.size()),(int)(b.getZ()+cY)).setTypeId(idS); //shell
+										player.getWorld().getBlockAt((int)(b.getX()+cX-(Math.sqrt(r))),(int)(b.getY()+slices.size()-(Math.sqrt(r))),(int)(b.getZ()+cY)).setTypeId(idS); //shell
 									}else{
 										if ((Math.sqrt(Math.pow(y,2) + Math.pow(x,2))) > (radius - 2.1)){
-											player.getWorld().getBlockAt((int)(b.getX()+cX),(int)(b.getY()+slices.size()),(int)(b.getZ()+cY)).setTypeId(idS); //shell
+											player.getWorld().getBlockAt((int)(b.getX()+cX-(Math.sqrt(r))),(int)(b.getY()+slices.size()-(Math.sqrt(r))),(int)(b.getZ()+cY)).setTypeId(idS); //shell
 										}else{
-											player.getWorld().getBlockAt((int)(b.getX()+cX),(int)(b.getY()+slices.size()),(int)(b.getZ()+cY)).setTypeId(idI); //in
+											player.getWorld().getBlockAt((int)(b.getX()+cX-(Math.sqrt(r))),(int)(b.getY()+slices.size()-(Math.sqrt(r))),(int)(b.getZ()+cY)).setTypeId(idI); //in
 										}
 									}
 								}
