@@ -7,11 +7,9 @@ public class Cmdmye extends MyECommand {
 				
 	}
 	
-	public boolean execute(String[] args) {
-		player.sendMessage("Current " + mye.getBuildTool());
-		
-		return true;
-		
+	public void execute(String[] args) {
+		player.sendMessage("§1MyEssentials is running");
+				
 	}
 	
 }
