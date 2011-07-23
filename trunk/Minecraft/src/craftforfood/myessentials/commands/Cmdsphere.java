@@ -80,7 +80,7 @@ public class Cmdsphere extends MyECommand {
 									}
 								}else{
 									if ((slices.size() == 1)||(slices.size() == (cSlices - 2))||(slices.size() == 0)||(slices.size() == (cSlices - 1))){
-										player.getWorld().getBlockAt((int)(b.getX()+cX.r),(int)(b.getY()+cY),(int)(b.getZ()+slices.size()-r)).setTypeId(idS); //shell
+										player.getWorld().getBlockAt((int)(b.getX()+cX-r),(int)(b.getY()+cY),(int)(b.getZ()+slices.size()-r)).setTypeId(idS); //shell
 									}else{
 										if ((Math.sqrt(Math.pow(y,2) + Math.pow(x,2))) > (radius - 2.1)){
 											player.getWorld().getBlockAt((int)(b.getX()+cX-r),(int)(b.getY()+cY),(int)(b.getZ()+slices.size()-r)).setTypeId(idS); //shell
