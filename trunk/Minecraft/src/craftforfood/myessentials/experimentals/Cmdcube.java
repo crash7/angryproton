@@ -1,6 +1,8 @@
-package craftforfood.myessentials.commands;
+package craftforfood.myessentials.experimentals;
 
 import org.bukkit.block.Block; 
+
+import craftforfood.myessentials.commands.MyECommand;
 
 public class Cmdcube extends MyECommand{
 	private Block b;	//block that contains the axis, where will be placed the cube

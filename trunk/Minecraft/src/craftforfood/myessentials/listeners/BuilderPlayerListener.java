@@ -18,8 +18,26 @@ public class BuilderPlayerListener extends PlayerListener {
 				&& event.getPlayer().getItemInHand().getTypeId() == mye.getBuildTool()
 				&& mye.hasPermission(event.getPlayer(), "myessentials.build.select")) {
 			
-			mye.setPointX(event.getPlayer(), 0, event.getClickedBlock());
-			event.getPlayer().sendMessage("Punto " + event.getClickedBlock().getX());
+			int lastpoint = 0;
+			while(mye.getPoint(lastpoint, event.getPlayer()) != null && lastpoint < MyEssentials.MAXPOINTS) {
+				lastpoint++;
+				
+			}
+			
+			if(lastpoint == MyEssentials.MAXPOINTS) {
+				lastpoint = 0;
+				for(int i = lastpoint+1; i < MyEssentials.MAXPOINTS; i++) {
+					mye.setPointX(event.getPlayer(), i, null);
+					
+				}
+								
+			}
+			
+			mye.setPointX(event.getPlayer(), lastpoint, event.getClickedBlock());
+			lastpoint++;
+			event.getPlayer().sendMessage("§7You have set the point " + lastpoint + 
+					  					" at X[" + event.getClickedBlock().getX() + "] Y[" + event.getClickedBlock().getY() + 
+					  					"] Z[" + event.getClickedBlock().getZ() + "]");
 			
 		}
 				

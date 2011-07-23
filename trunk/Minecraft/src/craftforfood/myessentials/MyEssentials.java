@@ -1,9 +1,12 @@
 package craftforfood.myessentials;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
 import org.bukkit.block.Block;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -27,20 +30,23 @@ import org.bukkit.util.config.Configuration;
  */ 
 public class MyEssentials extends JavaPlugin {
 	private static PermissionHandler pHandler;
-	private static final Logger cLog = Logger.getLogger("Minecraft");
+	public static final Logger cLog = Logger.getLogger("Minecraft");
 	
 	// Config!
-	private int buildTool; 
+	private int buildTool;
+	private List<Integer> bannedMaterials;
 	
 	// Useful
 	private HashMap<String, Block[]> points = new HashMap<String, Block[]>();
 	public static final int MAXPOINTS = 2;
+	public static final int MINY = 3;
+	public static final int MAXY = 128;
 		
 	public void onDisable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
 		MyEssentials.cLog.info("MyEssentials (version: " + pdfFile.getVersion() + ") by CraftForFood team desactivated!");
 	}
-
+	
 	public void onEnable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
 		MyEssentials.cLog.info("MyEssentials (version: " + pdfFile.getVersion() + ") by CraftForFood team activated!");
@@ -52,17 +58,18 @@ public class MyEssentials extends JavaPlugin {
 		// Permissions
 		Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
 	    if (permissionsPlugin == null) {
-	    	MyEssentials.cLog.info("Permissions plugin not detected, defaulting to OP!");
-	        return;
+	    	MyEssentials.cLog.info("[MyEssentials] Permissions plugin not detected, defaulting to OP!");
 	    }
+	    
 	    pHandler = ((Permissions) permissionsPlugin).getHandler();
-	    MyEssentials.cLog.info("Using Permissions plugin");
+	    MyEssentials.cLog.info("[MyEssentials] Using Permissions plugin");
 		
 		// Config
 		MyEssentials.cLog.info("MyEssentials by CraftForFood team config stuff");
 		Configuration pCfg = getConfiguration();
-		// Builder		
+		// Builder
 		buildTool = pCfg.getInt("build-tool", 280);
+		bannedMaterials = pCfg.getIntList("banned-materials", Arrays.asList(new Integer[] {46, 10, 11}));
 		
 		pCfg.save();
 		// END Config
@@ -82,19 +89,20 @@ public class MyEssentials extends JavaPlugin {
 					if(hasPermission(player, "myessentials." + cmd.getNode())) {
 						cmd.setMyEssentials(this);
 						cmd.setPlayer(player);
-						
-						return cmd.execute(args);
-																		
+						cmd.execute(args);
+																													
 					} else {
-						player.sendMessage("Don't try to mess with me, " + player.getDisplayName());
-						
+						player.sendMessage("§cDon't try to mess with me, " + player.getName());
+														
 					}
 									
 				} catch(Exception e) {
-					player.sendMessage("We got and exception!");
-					player.sendMessage(e.getMessage());
-					return true;
-					
+					if(hasPermission(player, "myessentials.debug")) {
+						player.sendMessage("§4We got an exception!");
+						player.sendMessage("§4" + e.getMessage());
+						
+					}
+									
 				}
 				
 			}
@@ -120,6 +128,17 @@ public class MyEssentials extends JavaPlugin {
 	public int getBuildTool() {
 		return buildTool;
 		
+	}
+	
+	/**
+	 * 
+	 * @param materialid
+	 * @return
+	 */
+	public boolean isAvailable(int materialid) {
+		return (materialid >= 0 && materialid <= 255 && Arrays.asList(Material.values()).contains(Material.getMaterial(materialid))
+				&& !bannedMaterials.contains(new Integer(materialid)));
+
 	}
 	
 	/**

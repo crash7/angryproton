@@ -29,6 +29,6 @@ public abstract class MyECommand {
 		
 	}
 	
-	public abstract boolean execute(String[] args);
+	public abstract void execute(String[] args);
 
 }
