@@ -26,10 +26,8 @@ public class Cmdsphere extends MyECommand {
 			player.sendMessage("seteame el punto, o no te construyo la esfera!");
 		else{
 			if (args.length == 0){
-				r = 0;
-				idI = 0;
-				idS = 0;
-				mCubes = 0;
+				player.sendMessage("§c" + mye.getCommand("sphere").getUsage());
+				return;
 			}else{
 				if (args.length != 3)
 					player.sendMessage("§c" + mye.getCommand("sphere").getUsage());
