@@ -15,6 +15,14 @@ commands:
         description: Creates an sphere!
         usage: /<command> radius externalmaterial internalmaterial [centered]
         permission: myessentials.build.sphere
+    zoneid:
+        description: Changes de block inside selected zone to any id
+        usage: /<command> id:data
+        permission: myessentials.build.zoneid
+    reload:
+        description: Reloads server plugins
+        usage: /<command>
+        permission: myessentials.reload
     zonecopy:
         description: Tells you how to use rapid build commands
     zonecut:
