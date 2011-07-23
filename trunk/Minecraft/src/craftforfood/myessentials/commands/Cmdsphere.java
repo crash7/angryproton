@@ -7,7 +7,7 @@ import java.util.Stack;
 public class Cmdsphere extends MyECommand {
 	private double mCubes; 	//maximum number of cubes
 	private double radius; 	//radius of the sphere
-	private Stack slices;  	//number of slices to build the sphere
+	private Stack<Double> slices;  	//number of slices to build the sphere
 	private Block b;		//block that contains the axis, where will be placed  the sphere
 	private int r;			//variable to store the radius of the sphere to create
 	private int c; 			//variable to store if the sphere is centered or not
@@ -19,11 +19,11 @@ public class Cmdsphere extends MyECommand {
 		
 	public Cmdsphere() {
 		super("build.sphere");
+		
     }
         
-    public boolean execute(String[] args) {
-		player.sendMessage("waaaa");    
-        slices = new Stack();
+    public void execute(String[] args) {
+		slices = new Stack<Double>();
 		b = mye.getPoint(0, player);
 		idO = 0;
 
@@ -88,6 +88,6 @@ public class Cmdsphere extends MyECommand {
 			}else
 				player.sendMessage("no da la altura del mapa para hacer una esfera con radio " + r);
 		}
-		return true;
+		return;
 	}
 }
