@@ -34,6 +34,7 @@ public class MyEssentials extends JavaPlugin {
 	
 	// Config!
 	private int buildTool;
+	private int maxBlocks;
 	private List<Integer> bannedMaterials;
 	
 	// Useful
@@ -41,7 +42,7 @@ public class MyEssentials extends JavaPlugin {
 	public static final int MAXPOINTS = 2;
 	public static final int MINY = 3;
 	public static final int MAXY = 128;
-		
+			
 	public void onDisable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
 		MyEssentials.cLog.info("MyEssentials (version: " + pdfFile.getVersion() + ") by CraftForFood team desactivated!");
@@ -69,6 +70,7 @@ public class MyEssentials extends JavaPlugin {
 		Configuration pCfg = getConfiguration();
 		// Builder
 		buildTool = pCfg.getInt("build-tool", 280);
+		maxBlocks = pCfg.getInt("max-blocks", 40000);
 		bannedMaterials = pCfg.getIntList("banned-materials", Arrays.asList(new Integer[] {46, 10, 11}));
 		
 		pCfg.save();
@@ -85,7 +87,7 @@ public class MyEssentials extends JavaPlugin {
 				try {
 					cmd = (MyECommand) getClassLoader()
 							.loadClass("craftforfood.myessentials.commands.Cmd" + command.getName().toLowerCase()).newInstance(); 
-					
+					player.sendMessage("command loaded");
 					if(hasPermission(player, "myessentials." + cmd.getNode())) {
 						cmd.setMyEssentials(this);
 						cmd.setPlayer(player);
@@ -127,6 +129,15 @@ public class MyEssentials extends JavaPlugin {
 	 */
 	public int getBuildTool() {
 		return buildTool;
+		
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getMaxBlocks() {
+		return maxBlocks;
 		
 	}
 	
