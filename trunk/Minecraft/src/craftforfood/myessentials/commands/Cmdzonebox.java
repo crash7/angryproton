@@ -3,10 +3,10 @@ package craftforfood.myessentials.commands;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 
-public class Cmdzoneid extends MyECommand {
+public class Cmdzonebox extends MyECommand {
 
-	public Cmdzoneid() {
-		super("build.zoneid");
+	public Cmdzonebox() {
+		super("build.zonebox");
 
 	}
 
@@ -30,7 +30,12 @@ public class Cmdzoneid extends MyECommand {
 						for(int xdim = Math.min(a.getX(), b.getX()); xdim <= Math.max(a.getX(), b.getX()); xdim++) {
 							for(int ydim = Math.min(a.getY(), b.getY()); ydim <= Math.max(a.getY(), b.getY()); ydim++) {
 								for(int zdim = Math.min(a.getZ(), b.getZ()); zdim <= Math.max(a.getZ(), b.getZ()); zdim++) {
-									blocks++;
+									if(xdim == a.getX() || xdim == b.getX() || zdim == a.getZ() || zdim == b.getZ() || ydim == a.getY()
+											|| ydim == b.getY()) {
+									
+										blocks++;
+										
+									}
                 					
 								}
 								
@@ -42,8 +47,13 @@ public class Cmdzoneid extends MyECommand {
 							for(int xdim = Math.min(a.getX(), b.getX()); xdim <= Math.max(a.getX(), b.getX()); xdim++) {
 								for(int ydim = Math.min(a.getY(), b.getY()); ydim <= Math.max(a.getY(), b.getY()); ydim++) {
 									for(int zdim = Math.min(a.getZ(), b.getZ()); zdim <= Math.max(a.getZ(), b.getZ()); zdim++) {
-										player.getWorld().getBlockAt(xdim,ydim,zdim).setTypeId(id);
-										player.getWorld().getBlockAt(xdim,ydim,zdim).setData((byte) data);
+										if(xdim == a.getX() || xdim == b.getX() || zdim == a.getZ() || zdim == b.getZ() || ydim == a.getY()
+												|| ydim == b.getY()) {
+										
+											player.getWorld().getBlockAt(xdim,ydim,zdim).setTypeId(id);
+											player.getWorld().getBlockAt(xdim,ydim,zdim).setData((byte) data);
+										
+										}
 										
 									}
 									
@@ -51,11 +61,8 @@ public class Cmdzoneid extends MyECommand {
 								
 							}
 							
-							player.sendMessage("§7You have changed " + blocks + 
-									" blocks to " + Material.getMaterial(id).name().toLowerCase().replace("_", " "));
-							
 						} else {
-							player.sendMessage("§cOver blocks limit (" + mye.getMaxBlocks() + ")");
+							player.sendMessage("§cOver blocks limit (max: " + mye.getMaxBlocks() + ", current: " + blocks + ")");
 							
 						}
 						

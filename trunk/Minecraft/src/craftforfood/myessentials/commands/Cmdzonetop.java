@@ -3,10 +3,10 @@ package craftforfood.myessentials.commands;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 
-public class Cmdzoneid extends MyECommand {
+public class Cmdzonetop extends MyECommand {
 
-	public Cmdzoneid() {
-		super("build.zoneid");
+	public Cmdzonetop() {
+		super("build.zonetop");
 
 	}
 
@@ -28,7 +28,7 @@ public class Cmdzoneid extends MyECommand {
 					
 					if(a != null && b != null) {
 						for(int xdim = Math.min(a.getX(), b.getX()); xdim <= Math.max(a.getX(), b.getX()); xdim++) {
-							for(int ydim = Math.min(a.getY(), b.getY()); ydim <= Math.max(a.getY(), b.getY()); ydim++) {
+							for(int ydim = Math.max(a.getY(), b.getY()); ydim <= Math.max(a.getY(), b.getY()); ydim++) {
 								for(int zdim = Math.min(a.getZ(), b.getZ()); zdim <= Math.max(a.getZ(), b.getZ()); zdim++) {
 									blocks++;
                 					
@@ -40,7 +40,7 @@ public class Cmdzoneid extends MyECommand {
 						
 						if(mye.getMaxBlocks() == 0 || blocks <= mye.getMaxBlocks()) {
 							for(int xdim = Math.min(a.getX(), b.getX()); xdim <= Math.max(a.getX(), b.getX()); xdim++) {
-								for(int ydim = Math.min(a.getY(), b.getY()); ydim <= Math.max(a.getY(), b.getY()); ydim++) {
+								for(int ydim = Math.max(a.getY(), b.getY()); ydim <= Math.max(a.getY(), b.getY()); ydim++) {
 									for(int zdim = Math.min(a.getZ(), b.getZ()); zdim <= Math.max(a.getZ(), b.getZ()); zdim++) {
 										player.getWorld().getBlockAt(xdim,ydim,zdim).setTypeId(id);
 										player.getWorld().getBlockAt(xdim,ydim,zdim).setData((byte) data);
@@ -50,7 +50,6 @@ public class Cmdzoneid extends MyECommand {
 								}
 								
 							}
-							
 							player.sendMessage("§7You have changed " + blocks + 
 									" blocks to " + Material.getMaterial(id).name().toLowerCase().replace("_", " "));
 							

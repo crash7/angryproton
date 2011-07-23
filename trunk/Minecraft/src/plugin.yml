@@ -3,6 +3,10 @@ main: craftforfood.myessentials.MyEssentials
 version: 0.1
 
 commands:
+    preload:
+        description: Reloads server plugins
+        usage: /<command>
+        permission: myessentials.reload
     buildtool:
         description: Tells the current build tool
         usage: /<command>
@@ -19,25 +23,31 @@ commands:
         description: Changes de block inside selected zone to any id
         usage: /<command> id:data
         permission: myessentials.build.zoneid
-    reload:
-        description: Reloads server plugins
-        usage: /<command>
-        permission: myessentials.reload
-    zonecopy:
-        description: Tells you how to use rapid build commands
-    zonecut:
-        description: Tells you how to use rapid build commands
-    zonepaste:
-        description: Tells you how to use rapid build commands
     zonetop:
-        description: Tells you how to use rapid build commands
+        description: Changes the upper slice of the current selection to any id
+        usage: /<command> id:data
+        permission: myessentials.build.zonetop
     zonefloor:
-        description: Tells you how to use rapid build commands
-    zoneexp:
-        description: Tells you how to use rapid build commands
-    zonexvar:
-        description: Tells you how to use rapid build commands
-    zoneyvar:
-        description: Tells you how to use rapid build commands
-    zonezvar:
-        description: Tells you how to use rapid build commands
+        description: Changes the lowest slice of the current selection to any id
+        usage: /<command> id:data
+        permission: myessentials.build.zonefloor
+    zonewalls:
+        description: Walls
+        usage: /<command> id:data
+        permission: myessentials.build.zonewalls
+    zonebox:
+        description: Creates a box with any id
+        usage: /<command> id:data
+        permission: myessentials.build.zonebox
+    zonecopy:
+        description: Copys selection
+        usage: /<command>
+        permission: myessentials.build.zonepaste
+    zonecut:
+        description: Cuts selection
+        usage: /<command>
+        permission: myessentials.build.zonecut
+    zonepaste:
+        description: Paste last cut/copy selection
+        usage: /<command>
+        permission: myessentials.build.zonepaste

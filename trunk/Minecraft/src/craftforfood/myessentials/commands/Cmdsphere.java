@@ -25,24 +25,19 @@ public class Cmdsphere extends MyECommand {
 		if (b == null)
 			player.sendMessage("seteame el punto, o no te construyo la esfera!");
 		else{
-			if (args.length == 0){
+			if (args.length == 0 || args.length != 3){
 				player.sendMessage("§c" + mye.getCommand("sphere").getUsage());
 				return;
-			}else{
-				if (args.length != 3)
-					player.sendMessage("§c" + mye.getCommand("sphere").getUsage());
-				
+			} else{
+					
 				r = Integer.parseInt(args[0]);
 				idS = Integer.parseInt(args[1]);
-				
-				if (!(mye.isAvailable(idS)))
-					return;
-				
 				idI = Integer.parseInt(args[2]);
 				
-				if (!(mye.isAvailable(idI)))
+				if (!(mye.isAvailable(idS, player)) && !(mye.isAvailable(idI, player))) {
 					return;
-				
+				}
+
 				mCubes = Math.ceil(r - 1 / 2) * 2 - 1;
 			}
 			
