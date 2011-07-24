@@ -35,6 +35,7 @@ public class MyEssentials extends JavaPlugin {
 	// Config!
 	private int buildTool;
 	private int maxBlocks;
+	private int maxRadius;
 	private List<Integer> bannedMaterials;
 	
 	// Useful
@@ -75,6 +76,7 @@ public class MyEssentials extends JavaPlugin {
 		// Builder
 		buildTool = pCfg.getInt("build-tool", 280);
 		maxBlocks = pCfg.getInt("max-blocks", 40000);
+		maxRadius = pCfg.getInt("max-radius", 30);
 		bannedMaterials = pCfg.getIntList("banned-materials", Arrays.asList(new Integer[] {46, 10, 11}));
 		
 		pCfg.save();
@@ -133,6 +135,15 @@ public class MyEssentials extends JavaPlugin {
 	 */
 	public int getBuildTool() {
 		return buildTool;
+		
+	}
+	
+	/**
+	 * Devuelve el máximo valor del radio permitido para una esfera
+	 * @return int
+	 */
+	public int getMaxRadius(){
+		return maxRadius;
 		
 	}
 	
