@@ -75,7 +75,7 @@ public class Cmdzonefloor extends MyECommand {
 			
 			
 		} else {
-			player.sendMessage("§c" + mye.getCommand("zoneid").getUsage());
+			player.sendMessage("§c" + mye.getCommand("zonefloor").getUsage());
 			
 		}
 		

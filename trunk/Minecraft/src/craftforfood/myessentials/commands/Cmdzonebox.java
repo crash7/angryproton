@@ -82,7 +82,7 @@ public class Cmdzonebox extends MyECommand {
 			
 			
 		} else {
-			player.sendMessage("§c" + mye.getCommand("zoneid").getUsage());
+			player.sendMessage("§c" + mye.getCommand("zonebox").getUsage());
 			
 		}
 		
