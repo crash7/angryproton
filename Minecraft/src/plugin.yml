@@ -3,21 +3,17 @@ main: craftforfood.myessentials.MyEssentials
 version: 0.1
 
 commands:
-    preload:
-        description: Reloads server plugins
-        usage: /<command>
-        permission: myessentials.reload
     buildtool:
         description: Tells the current build tool
-        usage: /<command>
+        usage: /buildtool
         permission: myessentials.build
     mye:
         description: Information about MyEssentials
-        usage: /<command>
+        usage: /mye
         permission: myessentials.mye
     sphere:
         description: Creates an sphere!
-        usage: /<command> radius externalmaterial internalmaterial [centered]
+        usage: /sphere radius externalmaterial internalmaterial
         permission: myessentials.build.sphere
     zoneid:
         description: Changes de block inside selected zone to any id
@@ -45,7 +41,7 @@ commands:
         permission: myessentials.build.zonepaste
     zonecut:
         description: Cuts selection
-        usage: /<command>
+        usage: /zonecut
         permission: myessentials.build.zonecut
     zonepaste:
         description: Paste last cut/copy selection

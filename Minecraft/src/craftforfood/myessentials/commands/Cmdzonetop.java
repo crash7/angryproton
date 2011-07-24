@@ -74,7 +74,7 @@ public class Cmdzonetop extends MyECommand {
 			
 			
 		} else {
-			player.sendMessage("§c" + mye.getCommand("zoneid").getUsage());
+			player.sendMessage("§c" + mye.getCommand("zonetop").getUsage());
 			
 		}
 		
