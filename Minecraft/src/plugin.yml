@@ -35,15 +35,11 @@ commands:
         description: Creates a box with any id
         usage: /<command> id:data
         permission: myessentials.build.zonebox
-    zonecopy:
+    zoneselection:
         description: Copys selection
-        usage: /<command>
-        permission: myessentials.build.zonepaste
-    zonecut:
-        description: Cuts selection
-        usage: /zonecut
-        permission: myessentials.build.zonecut
+        usage: /zoneselection
+        permission: myessentials.build.zoneselection
     zonepaste:
         description: Paste last cut/copy selection
-        usage: /<command>
+        usage: /zonepaste <cut/copy>
         permission: myessentials.build.zonepaste
