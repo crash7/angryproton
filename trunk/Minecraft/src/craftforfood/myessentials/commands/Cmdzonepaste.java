@@ -12,7 +12,7 @@ public class Cmdzonepaste extends MyECommand {
 
 	public void execute(String[] args) {
 		if(args.length == 1) {
-			boolean cut = (args[0] == "cut");
+			boolean cut = args[0].equals("cut");
 			Block a = mye.getPoint(0, player);
 						
 			if(a != null) {
@@ -21,13 +21,16 @@ public class Cmdzonepaste extends MyECommand {
 					int blocks = 0;
 					
 					for(int xdim = 0, xpos = a.getX(); xdim < selectedblocks.length; xdim++, xpos++) {
+						player.sendMessage(xdim + " " + xpos);
 						for(int ydim = 0, ypos = a.getY(); ydim < selectedblocks[xdim].length; ydim++, ypos++) {
+							player.sendMessage(ydim + " " + ypos);
 							for(int zdim = 0, zpos = a.getZ(); zdim < selectedblocks[xdim][ydim].length; zdim++, zpos++) {
+								player.sendMessage(zdim + " " + zpos);
 								player.getWorld().getBlockAt(xpos,ypos,zpos).setType(selectedblocks[xdim][ydim][zdim].getType());
 								player.getWorld().getBlockAt(xpos,ypos,zpos).setData(selectedblocks[xdim][ydim][zdim].getData());
 								
 								if(cut) {
-									player.getWorld().getBlockAt(xpos,ypos,zpos).setType(Material.AIR);
+									selectedblocks[xdim][ydim][zdim].setType(Material.AIR);
 									
 								}
 								
