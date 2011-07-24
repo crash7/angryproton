@@ -16,7 +16,7 @@ public class BuilderPlayerListener extends PlayerListener {
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK)
 				&& event.getPlayer().getItemInHand().getTypeId() == mye.getBuildTool()
-				&& mye.hasPermission(event.getPlayer(), "myessentials.build.select")) {
+				&& mye.hasPermission(event.getPlayer(), "build.select")) {
 			
 			int lastpoint = 0;
 			while(mye.getPoint(lastpoint, event.getPlayer()) != null && lastpoint < MyEssentials.MAXPOINTS) {

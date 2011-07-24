@@ -17,6 +17,7 @@ import com.nijikokun.bukkit.Permissions.Permissions;
 
 import craftforfood.myessentials.commands.MyECommand;
 import craftforfood.myessentials.listeners.BuilderPlayerListener;
+import craftforfood.myessentials.listeners.TeleportPlayerListener;
 
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -36,6 +37,7 @@ public class MyEssentials extends JavaPlugin {
 	private int buildTool;
 	private int maxBlocks;
 	private int maxRadius;
+	private int sprintBoots;
 	private List<Integer> bannedMaterials;
 	
 	// Useful
@@ -56,7 +58,8 @@ public class MyEssentials extends JavaPlugin {
 		
 		// Events registration
 		PluginManager pm = getServer().getPluginManager();
-	    pm.registerEvent(Event.Type.PLAYER_INTERACT, new BuilderPlayerListener(this), Event.Priority.Normal, this);
+		pm.registerEvent(Event.Type.PLAYER_INTERACT, new BuilderPlayerListener(this), Event.Priority.Normal, this);
+	    pm.registerEvent(Event.Type.PLAYER_TELEPORT, new TeleportPlayerListener(this), Event.Priority.Normal, this);
 		
 		// Permissions
 		Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
@@ -77,7 +80,9 @@ public class MyEssentials extends JavaPlugin {
 		buildTool = pCfg.getInt("build-tool", 280);
 		maxBlocks = pCfg.getInt("max-blocks", 40000);
 		maxRadius = pCfg.getInt("max-radius", 30);
+		maxRadius = pCfg.getInt("sprint-boots", 301);
 		bannedMaterials = pCfg.getIntList("banned-materials", Arrays.asList(new Integer[] {46, 10, 11}));
+		
 		
 		pCfg.save();
 		// END Config
@@ -94,7 +99,7 @@ public class MyEssentials extends JavaPlugin {
 					cmd = (MyECommand) getClassLoader()
 							.loadClass("craftforfood.myessentials.commands.Cmd" + command.getName().toLowerCase()).newInstance(); 
 
-					if(hasPermission(player, "myessentials." + cmd.getNode())) {
+					if(hasPermission(player, cmd.getNode())) {
 						cmd.setMyEssentials(this);
 						cmd.setPlayer(player);
 						cmd.execute(args);
@@ -105,7 +110,7 @@ public class MyEssentials extends JavaPlugin {
 					}
 									
 				} catch(Exception e) {
-					if(hasPermission(player, "myessentials.debug")) {
+					if(hasPermission(player, "adm.debug")) {
 						player.sendMessage("§4We got an exception!");
 						player.sendMessage("§4" + e.getMessage());
 						
@@ -125,7 +130,7 @@ public class MyEssentials extends JavaPlugin {
 	}
 	
 	public boolean hasPermission(Player player, String node) {
-		return (MyEssentials.pHandler != null) ? MyEssentials.pHandler.has(player, node) : player.isOp();
+		return (MyEssentials.pHandler != null) ? MyEssentials.pHandler.has(player, "myessentials." + node) : player.isOp();
 		
 	}
 	
@@ -151,6 +156,15 @@ public class MyEssentials extends JavaPlugin {
 	 * 
 	 * @return
 	 */
+	public int getSprintBoots(){
+		return sprintBoots;
+		
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getMaxBlocks() {
 		return maxBlocks;
 		
@@ -163,7 +177,7 @@ public class MyEssentials extends JavaPlugin {
 	 */
 	public boolean isAvailable(int materialid, Player player) {
 		return (materialid >= 0 && materialid <= 255 && Arrays.asList(Material.values()).contains(Material.getMaterial(materialid))
-				&& (!bannedMaterials.contains(new Integer(materialid)) || hasPermission(player, "myessentials.build.banned")));
+				&& (!bannedMaterials.contains(new Integer(materialid)) || hasPermission(player, "adm.bannedmaterials")));
 
 	}
 	
