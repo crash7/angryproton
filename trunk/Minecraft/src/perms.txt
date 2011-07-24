@@ -1,0 +1,17 @@
+myessentials
+	mye
+	build
+		zoneid
+		zonetop
+		zonefloor
+		zonewalls
+		zonebox
+		zonepaste
+		zoneselection
+		sphere
+	adm
+		debug
+		bannedmaterials
+		scheduler
+	alerts
+		teleport
